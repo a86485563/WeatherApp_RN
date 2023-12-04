@@ -2,9 +2,10 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./src/screen/HomeScreen";
-import DetailsScreen from "./src/screen/DetailsScreen";
+import HomeScreen from "./src/screen/home/index";
+import DetailsScreen from "./src/screen/DetailScreen/index";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
 
 const Stack = createNativeStackNavigator();
 
