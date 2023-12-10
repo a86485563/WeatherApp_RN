@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 const { width } = Dimensions.get("window");
-export const marginLeft = width * 0.05;
+const marginLeft = width * 0.05;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "95%",
     height: "50%",
-    paddingVertical:8
+    paddingTop:3,
+    paddingBottom: 50
   },
   heading: {
     color: "white",
@@ -35,10 +36,19 @@ export const styles = StyleSheet.create({
   titleText: {
     color: "white",
     fontWeight:'bold',
-    marginLeft: marginLeft,
+    marginLeft
   },
   titleContainer: {
     flexDirection: 'column',
     justifyContent: "start",
   },
+  titleText5: {
+    color: "black",
+    fontWeight:'bold',
+    fontSize : 15,
+    textAlign: 'center'
+  },
+  cylinderCardStyle:{
+    marginHorizontal: 10
+  }
 });

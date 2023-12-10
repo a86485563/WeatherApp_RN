@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
   cardLeftContainer : {marginTop:60,paddingLeft:10,width:width*0.5}
 });
 const RectangleCard = ({apparentTemp,tempUnit,location,weatherDesc,temp,PoP,icon}) => {
-  console.log(`RectangleCard-data icon: ${ASSETS_PREFIX+icon} averageTemp: ${apparentTemp} location: ${location}`);
+  // console.log(`RectangleCard-data icon: ${ASSETS_PREFIX+icon} averageTemp: ${apparentTemp} location: ${location}`);
   const formatWeatherDesc =(weatherDesc)=>{
-    console.log('in formatWeatherDesc',weatherDesc);
+    // console.log('in formatWeatherDesc',weatherDesc);
     let result = '';
     let array = weatherDesc.split('。').slice(0,4);
     result = array.join('。');

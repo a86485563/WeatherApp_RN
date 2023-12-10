@@ -11,182 +11,7 @@ import Card from "../../model/Card";
 
 function HomeScreen({ navigation }) {
   const [term, setTerm] = useState("");
-  const insets = useSafeAreaInsets();
-  const DATA = [
-    {
-      icon: require("../../../assets/sunny.png"),
-      location: "嘉義縣",
-      averageTemp: {
-        parameterName: "26",
-        parameterValue: "°C",
-      },
-      minTemp: {
-        parameterName: "22",
-        parameterValue: "°C",
-      },
-      highTemp: {
-        parameterName: "30",
-        parameterValue: "°C",
-      },
-      commentTemp: {
-        parameterName: "舒適",
-        parameterValue: "",
-      },
-      weatherDes: {
-        parameterName: "晴時多雲",
-        parameterValue: "",
-      },
-      rainProbability: {
-        parameterName: "10",
-        parameterValue: "%",
-      },
-    },
-    {
-      icon: require("../../../assets/sunny.png"),
-      location: "台北市",
-      averageTemp: {
-        parameterName: "26",
-        parameterValue: "°C",
-      },
-      minTemp: {
-        parameterName: "22",
-        parameterValue: "°C",
-      },
-      highTemp: {
-        parameterName: "30",
-        parameterValue: "°C",
-      },
-      commentTemp: {
-        parameterName: "舒適",
-        parameterValue: "",
-      },
-      weatherDes: {
-        parameterName: "晴時多雲",
-        parameterValue: "",
-      },
-      rainProbability: {
-        parameterName: "10",
-        parameterValue: "%",
-      },
-    },
-    {
-      icon: require("../../../assets/sunny.png"),
-      location: "新北市",
-      averageTemp: {
-        parameterName: "26",
-        parameterValue: "°C",
-      },
-      minTemp: {
-        parameterName: "22",
-        parameterValue: "°C",
-      },
-      highTemp: {
-        parameterName: "30",
-        parameterValue: "°C",
-      },
-      commentTemp: {
-        parameterName: "舒適",
-        parameterValue: "",
-      },
-      weatherDes: {
-        parameterName: "晴時多雲",
-        parameterValue: "",
-      },
-      rainProbability: {
-        parameterName: "10",
-        parameterValue: "%",
-      },
-    },
-    {
-      icon: require("../../../assets/sunny.png"),
-      location: "台中市",
-      averageTemp: {
-        parameterName: "26",
-        parameterValue: "°C",
-      },
-      minTemp: {
-        parameterName: "22",
-        parameterValue: "°C",
-      },
-      highTemp: {
-        parameterName: "30",
-        parameterValue: "°C",
-      },
-      commentTemp: {
-        parameterName: "舒適",
-        parameterValue: "",
-      },
-      weatherDes: {
-        parameterName: "晴時多雲",
-        parameterValue: "",
-      },
-      rainProbability: {
-        parameterName: "10",
-        parameterValue: "%",
-      },
-    },
-    {
-      icon: require("../../../assets/sunny.png"),
-      location: "高雄市",
-      averageTemp: {
-        parameterName: "26",
-        parameterValue: "°C",
-      },
-      minTemp: {
-        parameterName: "22",
-        parameterValue: "°C",
-      },
-      highTemp: {
-        parameterName: "30",
-        parameterValue: "°C",
-      },
-      commentTemp: {
-        parameterName: "舒適",
-        parameterValue: "",
-      },
-      weatherDes: {
-        parameterName: "晴時多雲",
-        parameterValue: "",
-      },
-      rainProbability: {
-        parameterName: "10",
-        parameterValue: "%",
-      },
-    },
-    {
-      icon: require("../../../assets/sunny.png"),
-      location: "台南市",
-      averageTemp: {
-        parameterName: "26",
-        parameterValue: "°C",
-      },
-      minTemp: {
-        parameterName: "22",
-        parameterValue: "°C",
-      },
-      highTemp: {
-        parameterName: "30",
-        parameterValue: "°C",
-      },
-      commentTemp: {
-        parameterName: "舒適",
-        parameterValue: "",
-      },
-      weatherDes: {
-        parameterName: "晴時多雲",
-        parameterValue: "",
-      },
-      rainProbability: {
-        parameterName: "10",
-        parameterValue: "%",
-      },
-    },
-  ];
-  const TIME_FLAG = {
-    MORNING_TO_NIGHT: "1", // 06-18
-    NIGHT_TO_TOMORROW_MORNING: "2", // 18-06
-    TOMORROW_MORNING_TO_TOMORROW_NIGHT: "3", // 06-18
-  };
+  
   const [fetchData, result, loading, errorMessage] = getAllLocalWeather(
     "v1/rest/datastore/F-D0047-089",
   );
@@ -210,7 +35,8 @@ function HomeScreen({ navigation }) {
 
   const renderItem = ({ item }) => {
     return (
-      <RectangleCard
+      <TouchableOpacity onPress={() => onCardPress(item)}>
+         <RectangleCard
                   apparentTemp={item.apparentTemp}
                   tempUnit={item.tempUnit}
                   location={item.location}
@@ -219,6 +45,7 @@ function HomeScreen({ navigation }) {
                   PoP={item.PoP}
                   icon={item.icon}
                 />
+      </TouchableOpacity>
     );
   };
   const getCardList = () => {
@@ -260,10 +87,10 @@ function HomeScreen({ navigation }) {
    * call api and navigate to detail page
    * @param {string} location
    */
-  const onCardPress = (location) => {
-    console.log('onCardPress location is ',location);
+  const onCardPress = (card) => {
+    console.log('onCardPress location is ',card);
     navigation.navigate("Details",{
-      location
+      card
     });
   };
   return (
@@ -305,7 +132,7 @@ function HomeScreen({ navigation }) {
           </Text>
           <View style={{ alignItems: "center" }}>
             {bigCard ? (
-              <TouchableOpacity onPress={() => onCardPress(bigCard.location)}>
+              <TouchableOpacity onPress={() => onCardPress(bigCard)}>
                 <RectangleCard
                   apparentTemp={bigCard.apparentTemp}
                   tempUnit={bigCard.tempUnit}

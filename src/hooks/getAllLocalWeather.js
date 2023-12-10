@@ -10,9 +10,12 @@ export default(path, params) => {
 
     // 定義api function
     const fetchData = async (path, params) => {
+        console.log('**** path',path);
+        console.log('**** params',params);
         try { 
             setLoading(true);// 開始loading
             const response = await weather.get(path, {params: params}); // call api
+            console.log('***',response?.data?.records);
             // 設定api result
             const records = response?.data?.records.locations[0];
             // 設定cardList

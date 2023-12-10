@@ -9,6 +9,9 @@ class Card {
     CI: 5, // 舒適度指數
     WeatherDescription: 6, //天氣預報綜合描述
     PoP6h: 7, //6小時降雨機率
+    WS: 8, // 風速
+    WD: 9, // 風向
+    Td: 10, // 露點露點溫度
   };
   static WEATHER_ICON_SOURCE = {
     CLOUDY: require("../../assets/cloudy.png"), // 雲天 icon
@@ -18,12 +21,8 @@ class Card {
   };
 
   constructor(locationData) {
-    console.log("in card");
+    // console.log("in card");
     const weatherElement = locationData.weatherElement;
-    // console.log('*********')
-    console.log(locationData);
-    // console.log('weatherElement');
-    // console.log(weatherElement);
     this.tempUnit = "°C"; // 溫度單位
     this.weatherDesc =
       weatherElement[
@@ -44,11 +43,18 @@ class Card {
         .value
     ); // 取得圖片
     this.location = locationData.locationName; // 地點
-    this.PoP = weatherElement[Card.WEATHER_ELEMENT_INDEX.PoP6h].time[0].elementValue[0].value
+    this.PoP =
+      weatherElement[
+        Card.WEATHER_ELEMENT_INDEX.PoP6h
+      ].time[0].elementValue[0].value;
+    this.windSpeed = weatherElement[Card.WEATHER_ELEMENT_INDEX.WS].time[0];
+    this.windDirection = weatherElement[Card.WEATHER_ELEMENT_INDEX.WD].time[0];
+    this.relativeHumidity = weatherElement[Card.WEATHER_ELEMENT_INDEX.RH].time[0];
+    this.dewPoint = weatherElement[Card.WEATHER_ELEMENT_INDEX.Td].time[0].elementValue[0].value;
 
-    console.log(
-      `in card tempUnit : ${this.tempUnit} , weatherDesc: ${this.weatherDesc}, apparentTemp: ${this.apparentTemp} , temp: ${this.temp} , icon : ${this.icon} , location: ${this.location}`
-    );
+    // console.log(
+    //   `in card tempUnit : ${this.tempUnit} , weatherDesc: ${this.weatherDesc}, apparentTemp: ${this.apparentTemp} , temp: ${this.temp} , icon : ${this.icon} , location: ${this.location}`
+    // );
   }
 
   /**
@@ -57,7 +63,7 @@ class Card {
    * @returns {string} icon Path
    */
   getIcon = (weatherDes) => {
-    console.log("in getIcon weatherDes: ", weatherDes);
+    // console.log("in getIcon weatherDes: ", weatherDes);
     let result = ""; // 圖片路徑
     switch (weatherDes) {
       case "1":
