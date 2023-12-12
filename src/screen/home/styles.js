@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 const { width } = Dimensions.get("window");
 const marginLeft = width * 0.05;
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,

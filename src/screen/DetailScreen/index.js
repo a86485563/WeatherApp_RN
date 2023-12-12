@@ -15,27 +15,24 @@ const {height,width} = Dimensions.get("window");
 
 function DetailsScreen({ route, navigation }) {
   /**
-   * 傳入當前時間，判斷要搜尋當日1200或是隔日
+   * 傳入當前時間，判斷要搜尋當日1200或是隔日1200
    * @param {moment} time 
    * @returns {string} queryTime
    */
   const getQueryTime = (time)=>{
-    console.log('*****',time);
     let result = '';
     const noon = moment('12:00','HH:mm');
     const currentHour =time.hour();
     const [year, month, day] = time.toArray().slice(0, 3);
     if (currentHour < noon) {
-      // result = `${time.year()}-${time.month()+1}-${time.day()} 12:00`;
       result = moment([year, month, day, 12]).format("YYYY-MM-DD HH:mm");
-      console.log('***',result);
     } else {
       result = moment([year, month, day+1, 12]).format("YYYY-MM-DD HH:mm");
     }
     return result;
   }
 
-  const renderItem = ({ item }) => {
+  const renderLocationDetail = ({ item }) => {
     return (
       <RectangleCard
         apparentTemp={item.apparentTemp}
@@ -51,12 +48,10 @@ function DetailsScreen({ route, navigation }) {
   const [currentTime, setCurrentTime] = useState(
     moment().format("YYYY-MM-DD HH:mm")
   );
-
-  const card = route.params.card;
-  const apiPath = getApiPathByLocation(card.location);
-  console.log('apiPath: ',apiPath);
+  const card = route.params.card; // 從router 取得變數
+  const apiPath = getApiPathByLocation(card.location); // 取得api path
   const queryTime = getQueryTime(moment());
-
+  // 呼叫api
   const [fetchData, result, loading, errorMessage] = getAllLocalWeather(
     apiPath,
     {
@@ -80,8 +75,6 @@ function DetailsScreen({ route, navigation }) {
     return () => clearInterval(intervalId);
   }, []);
 
-  // console.log("result****", result);
-
   return (
     <View style={[styles.container]}>
       <LinearGradient
@@ -90,10 +83,6 @@ function DetailsScreen({ route, navigation }) {
       >
         <HeaderRNE
           barStyle="default"
-          rightComponent={{
-            icon: "menu",
-            color: "#fff",
-          }}
           containerStyle={{
             flexDirection: "row",
             backgroundColor: "transparent",
@@ -126,7 +115,7 @@ function DetailsScreen({ route, navigation }) {
         <FlatList
           contentContainerStyle={{ alignItems: "center" }}
           data={result}
-          renderItem={renderItem}
+          renderItem={renderLocationDetail}
           keyExtractor={(item) => item.location}
         />
         </View>

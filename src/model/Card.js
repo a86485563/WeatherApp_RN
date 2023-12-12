@@ -63,21 +63,20 @@ class Card {
    * @returns {string} icon Path
    */
   getIcon = (weatherDes) => {
-    // console.log("in getIcon weatherDes: ", weatherDes);
     let result = ""; // 圖片路徑
     switch (weatherDes) {
-      case "1":
-      case "2":
+      case "01":
+      case "02":
         result = Card.WEATHER_ICON_SOURCE.SUNNY;
         break;
-      case "4":
-      case "5":
-      case "6":
-      case "7":
+      case "04":
+      case "05":
+      case "06":
+      case "07":
         result = Card.WEATHER_ICON_SOURCE.CLOUDY;
         break;
-      case "8":
-      case "9":
+      case "08":
+      case "09":
       case "10":
       case "12":
       case "13":

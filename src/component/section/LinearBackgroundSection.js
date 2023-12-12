@@ -10,8 +10,6 @@ import CylinderCard from '../card/CylinderCard'
 const { width,height } = Dimensions.get("window");
 
 const LinearBackgroundSection = ({card}) => {
-  console.log("新北市個地區天氣狀況");
-  console.log(card);
   const cylinderCards = [
     {title: '相對濕度', icon:<Ionicons name="md-water-sharp" size={70} color="#0072E3"/>, value: card.relativeHumidity.elementValue[0].value+'%',height:height*0.19},
     {title: '風速', icon: <Feather name="wind" size={70} color="black" />, value: card.windSpeed.elementValue[0].value+card.windSpeed.elementValue[0].measures,height:height*0.19},
